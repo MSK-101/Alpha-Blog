@@ -1,27 +1,26 @@
-<h2>This is index page</h2>
-
-<table>
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th colspan='3'>Actions</th>
-        </tr>
-    </thead>
-
-    <tbody>
-    <% @articles.each do |i|%>
-        <tr>
-            <td><%= i.title%></td>
-            <td><%= i.description%></td>
-            <td><%= link_to 'Show | ', article_path(i) %></td> 
-            <td><%= link_to 'Edit | ', edit_article_path(i) %></td> 
-            <td><%= link_to 'Delete', article_path(i.id), method: :delete , data:{confirm: "Are you sure, article with id #{i.id}? "}%></td>
-        </tr>
+<div class="index-page">
+    <h2 class='text-center pt-4'>Article Listing</h2>
+    <div class= 'container'>
+        <% @articles.each do |i|%>
+            <div class="row justify-content-md-center">
+                <div class="col-7">
+                    <div class="card text-center mt-4">
+                        <div class="card-header font-italic">
+                            By Muhammad Subhan
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title text-success font-size-32"><%= i.title%></h5>
+                            <p class="card-text"><%= i.description%></p>
+                            <%= link_to "View", article_path(i), class: "btn btn-outline-success" %>                      
+                            <%= link_to "Edit", edit_article_path(i), class: "btn btn-outline-info" %>
+                            <%= link_to "Delete", article_path(i), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>
+                        </div>
+                        <div class="card-footer text-muted">
+                          <small>  Created <%=time_ago_in_words(i.created_at)%> ago, Edited <%=time_ago_in_words(i.updated_at)%> ago </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
         <%end%>
-    </tbody>
-</table>
-
-<p>
-<%= link_to 'Create new article', new_article_path%>
-</p>
+    </div>
+</div>
