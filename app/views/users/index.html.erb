@@ -1,0 +1,23 @@
+<h1 class="text-center mt-4"> Welcome to Users Index </h1>
+
+<div class= 'container'>
+    <% @users.each do |i|%>
+        <div class="row justify-content-md-center">
+            <div class="col-7">
+                <div class="card text-center mt-4">
+                    <div class="card-header font-italic">
+                        <%= link_to i.username, i%>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"><%= pluralize( i.articles.count, "article")%></p>
+                        <%= link_to "View profile", i, class: "btn btn-outline-success" %>                      
+                        <%= link_to "Edit profile", edit_user_path(i), class: "btn btn-outline-info" %>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <small>  Joined <%=time_ago_in_words(i.created_at)%> ago </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <%end%>
+</div>
