@@ -1,5 +1,9 @@
 <h1 class="text-center mt-4"> Welcome to Users Index </h1>
 
+<div class="text-center mt-4 digg_pagination">
+    <%= will_paginate @users, :container => false %>
+</div>
+
 <div class= 'container'>
     <% @users.each do |i|%>
         <div class="row justify-content-md-center">
@@ -10,8 +14,17 @@
                     </div>
                     <div class="card-body">
                         <p class="card-text"><%= pluralize( i.articles.count, "article")%></p>
-                        <%= link_to "View profile", i, class: "btn btn-outline-success" %>                      
-                        <%= link_to "Edit profile", edit_user_path(i), class: "btn btn-outline-info" %>
+                        <%= link_to "View profile", i, class: "btn btn-outline-success" %>        
+                        <% if logged_in? %> 
+                            <% if i  == current_user %>              
+                                <%= link_to "Edit profile", edit_user_path(i), class: "btn btn-outline-info" %>
+                            <%end%>
+                            <% if current_user.admin? %>
+                                <%= link_to "Delete user", user_path(i), class: "btn btn-outline-danger", method: :delete,
+                                data: {confirm: "Are you sure you want to delete? "}%>
+                            <%end%>
+
+                        <%end%>
                     </div>
                     <div class="card-footer text-muted">
                         <small>  Joined <%=time_ago_in_words(i.created_at)%> ago </small>
@@ -20,4 +33,8 @@
             </div>
         </div>
     <%end%>
+</div>
+
+<div class="text-center p-5 digg_pagination">
+    <%= will_paginate @articles, :container => false %>
 </div>

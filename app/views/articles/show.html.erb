@@ -3,6 +3,8 @@
 <p>Title: <%= @article.title %></p>
 <p>Description: <%= @article.description %> </p>
 
-<%= link_to 'Edit', edit_article_path(@article)%> |
-<%= link_to 'Delete', article_path(@article), method: :delete, data:{confirm: "Are you sure, article with id #{@article.id}? "}%> |
+<% if logged_in? && (@article.user == current_user || current_user.admin?)%>
+    <%= link_to 'Edit', edit_article_path(@article)%> |
+    <%= link_to 'Delete', article_path(@article), method: :delete, data:{confirm: "Are you sure, article with id #{@article.id}? "}%> |
+<%end%>
 <%= link_to 'Return to articles listing', articles_path%>

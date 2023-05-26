@@ -4,14 +4,18 @@
                 <div class="col-7">
                     <div class="card text-center mt-4">
                         <div class="card-header font-italic">
-                            By <%= i.user.username if i.user%>
+                            <% if i.user %>
+                                By <%= link_to i.user.username, user_path(i.user) %>
+                            <% end %>
                         </div>
                         <div class="card-body">
                             <h5 class="card-title text-success font-size-32"><%= i.title%></h5>
                             <p class="card-text"><%= i.description%></p>
                             <%= link_to "View", article_path(i), class: "btn btn-outline-success" %>                      
-                            <%= link_to "Edit", edit_article_path(i), class: "btn btn-outline-info" %>
-                            <%= link_to "Delete", article_path(i), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>
+                            <% if logged_in? && (i.user == current_user || current_user.admin?)%>
+                                <%= link_to "Edit", edit_article_path(i), class: "btn btn-outline-info" %>
+                                <%= link_to "Delete", article_path(i), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>
+                            <% end %>
                         </div>
                         <div class="card-footer text-muted">
                           <small>  Created <%=time_ago_in_words(i.created_at)%> ago, Edited <%=time_ago_in_words(i.updated_at)%> ago </small>

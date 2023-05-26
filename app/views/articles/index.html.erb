@@ -1,6 +1,14 @@
 <div class="index-page">
     <h2 class='text-center pt-4'>Article Listing</h2>
 
+    <div class="text-center mt-4 digg_pagination">
+        <%= will_paginate @articles, :container => false %>
+    </div>
+
     <%= render 'article' %>
-    
+
+    <div class="text-center p-5 digg_pagination">
+    <%= will_paginate @articles, :container => false %>
+    </div>
+
 </div>
