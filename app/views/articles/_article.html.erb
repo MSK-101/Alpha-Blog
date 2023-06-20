@@ -7,6 +7,11 @@
                             <% if i.user %>
                                 By <%= link_to i.user.username, user_path(i.user) %>
                             <% end %>
+                            <% if i.categories.any? %>
+                                <div class="mt-1">
+                                    <%= render i.categories%>
+                                </div>
+                            <%end%>                            
                         </div>
                         <div class="card-body">
                             <h5 class="card-title text-success font-size-32"><%= i.title%></h5>

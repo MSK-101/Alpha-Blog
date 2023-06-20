@@ -12,27 +12,36 @@
       <li class="nav-item">
         <%= link_to "Bloggers", users_path, class: "nav-link"%>
       </li>
+      <li class="nav-item">
+        <%= link_to "Categories", categories_path, class: "nav-link"%>
+      </li>
 
       <% if logged_in? %>
-        <li class="nav-item">
-          <%= "(Admin)" if current_user.admin?%> <%=link_to current_user.username, user_path(current_user), class:"nav-link" %>
-        </li>
-        <li class="nav-item ">
-          <%= link_to 'Delete Profile', user_path(current_user), class:"nav-link text-danger", method: :delete, data:{confirm: "Are you sure?"} %>
-        </li>
-        <li class="nav-item">
-          <%= link_to 'Logout', logout_path, class:"nav-link", method: :delete %>
-        </li>
+
+          <li class="nav-item">
+            <% if current_user.admin? %>
+              <%= link_to "Admin_"+current_user.username, user_path(current_user), class: "nav-link text-primary" %>
+            <% else %>
+              <%= link_to current_user.username, user_path(current_user), class: "nav-link" %>
+            <% end %>
+          </li>
+          <li class="nav-item ">
+            <%= link_to 'Delete Profile', user_path(current_user), class:"nav-link text-danger", method: :delete, data:{confirm: "Are you sure?"} %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Logout', logout_path, class:"nav-link", method: :delete %>
+          </li>
 
       <%else%>
         <li class="nav-item">
           <%= link_to 'Log in', login_path, class:"nav-link" %>
         </li>
+      <li class="nav-item">
+         <%= link_to 'Sign up!', signup_path, class:"nav-link" %>
+      </li>
+
       <%end%>
 
-      <li class="nav-item">
-      <%= link_to 'Sign up!', signup_path, class:"nav-link" %>
-      </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

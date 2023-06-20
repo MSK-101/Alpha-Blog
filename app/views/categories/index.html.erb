@@ -1,0 +1,19 @@
+<h1 class="text-center mt-4">Categories</h1>
+
+    <div class= 'container'>
+        <% @categories.each do |i|%>
+            <div class="row justify-content-md-center">
+                <div class="col-7">
+                    <div class="card text-center mt-4">
+                        <div class="card-body">
+                            <h5 class="card-title text-success font-size-32"><%= link_to i.name, category_path(i)%></h5>
+                            <p class="card-text"><%= pluralize( i.articles.count, "article")%></p>                        
+                        </div>
+                        <div class="card-footer text-muted">
+                          <small>  Created <%=time_ago_in_words(i.created_at)%> ago, Edited <%=time_ago_in_words(i.updated_at)%> ago </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <%end%>
+    </div>
